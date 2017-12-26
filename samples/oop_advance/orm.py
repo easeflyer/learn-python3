@@ -22,10 +22,17 @@ class IntegerField(Field):
     def __init__(self, name):
         super(IntegerField, self).__init__(name, 'bigint')
 
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
 class ModelMetaclass(type):
 
+        # cls   当前准备创建的类的对象；
+        # name  类的名字；
+        # bases 类继承的父类集合；
+        # attrs 类的方法集合。
     def __new__(cls, name, bases, attrs):
         if name=='Model':
+            # print ("cls:",cls,"\nname:",name,"\nbases:",bases,"\nattrs:",attrs) # 为了明确 4个参数都是什么
             return type.__new__(cls, name, bases, attrs)
         print('Found model: %s' % name)
         mappings = dict()
@@ -34,7 +41,7 @@ class ModelMetaclass(type):
                 print('Found mapping: %s ==> %s' % (k, v))
                 mappings[k] = v
         for k in mappings.keys():
-            attrs.pop(k)
+            attrs.pop(k)  # 删除的原因是 用户定义的类 属性可能 和 实例的属性 同名。造成被覆盖
         attrs['__mappings__'] = mappings # 保存属性和列的映射关系
         attrs['__table__'] = name # 假设表名和类名一致
         return type.__new__(cls, name, bases, attrs)
@@ -75,3 +82,5 @@ class User(Model):
 
 u = User(id=12345, name='Michael', email='test@orm.org', password='my-pwd')
 u.save()
+
+print(u.id)

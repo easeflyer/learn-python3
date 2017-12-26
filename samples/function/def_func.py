@@ -4,7 +4,7 @@
 import math
 
 def my_abs(x):
-    if not isinstance(x, (int, float)):
+    if not isinstance(x, (int, float)):   #  isinstance() arg 2 must be a type or tuple of types
         raise TypeError('bad operand type')
     if x >= 0:
         return x
@@ -23,4 +23,5 @@ x, y = move(100, 100, 60, math.pi / 6)
 print(x, y)
 
 # TypeError: bad operand type:
-my_abs('123')
+# my_abs('123')
+my_abs(123)

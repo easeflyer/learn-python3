@@ -1,4 +1,6 @@
 # err_raise.py
+
+
 class FooError(ValueError):
     pass
 
@@ -8,5 +10,14 @@ def foo(s):
         raise FooError('invalid value: %s' % s)
     return 10 / n
 
-foo('0')
 
+# foo('0')
+
+
+
+try:
+    foo('0')
+except FooError as e:
+    print("fooerror:",e)
+finally:
+    print("finally...")

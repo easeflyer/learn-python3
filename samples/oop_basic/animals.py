@@ -13,7 +13,7 @@ class Cat(Animal):
     def run(self):
         print('Cat is running...')
 
-def run_twice(animal):
+def run_twice(animal):   # 这里 animal 只是一个形参。并不对参数做类型要求
     animal.run()
     animal.run()
 
@@ -29,4 +29,17 @@ print('d is Animal?', isinstance(d, Animal))
 print('d is Dog?', isinstance(d, Dog))
 print('d is Cat?', isinstance(d, Cat))
 
+class yazi:
+    def run(self):
+        print("我不是animal，但是看起来像animal")
+
+    
+d = yazi()
+
 run_twice(c)
+run_twice(d)
+
+print(type(d)=='yazi')  # False
+print(type(d)==yazi)    # True
+print(type(c)==Animal)  # False
+print(type(c)==Cat)     # True
