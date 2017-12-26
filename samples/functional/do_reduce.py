@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 from functools import reduce
+from collections import Iterable
+# import sys
 
 CHAR_TO_INT = {
     '0': 0,
@@ -18,9 +20,12 @@ CHAR_TO_INT = {
 
 def str2int(s):
     ints = map(lambda ch: CHAR_TO_INT[ch], s)
+    # print(isinstance(ints,Iterable)) # 可迭代
+    ints = list(ints)  # 转换成 list 迭代结果。就可以重复使用了。
+    print(ints) #;sys.exit()   # 迭代后 符合复原
     return reduce(lambda x, y: x * 10 + y, ints)
 
-print(str2int('0'))
+# print(str2int('0'))
 print(str2int('12300'))
 print(str2int('0012345'))
 

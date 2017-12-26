@@ -11,6 +11,7 @@ class Student(object):
             return 99
         if attr=='age':
             return lambda: 25
+        # If I don't throw an exception, Any undefined attributes return None
         raise AttributeError('\'Student\' object has no attribute \'%s\'' % attr)
 
 s = Student()
@@ -18,4 +19,5 @@ print(s.name)
 print(s.score)
 print(s.age())
 # AttributeError: 'Student' object has no attribute 'grade'
-print(s.grade)
+# print(s.grade)
+# print(s.abc)
