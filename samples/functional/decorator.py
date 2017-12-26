@@ -16,6 +16,15 @@ def now():
 
 now()
 
+'''
+解析：
+
+@log 装饰器 放在 def now 前面。 相当于执行了 now = log(now) ,再调用 now() 的时候，实际上执行的是：
+log(now) 返回的：wrapper 函数。
+'''
+
+
+
 def logger(text):
     def decorator(func):
         @functools.wraps(func)
@@ -30,4 +39,10 @@ def today():
     print('2015-3-25')
 
 today()
-print(today.__name__)
+print(today.__name__)  #注意装饰器中的 @functools.wraps(func) 否则结果为：wrapper
+
+'''
+解析：
+三层嵌套的装饰器函数是这样的
+now = log('execute')(now)
+'''

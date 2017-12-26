@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-class Student(object):
+class Student(object):                              # 继承自 object 可以省略，因为 object 是基类
 
-    def __init__(self, name, score):
+    def __init__(self, name, score):                # __init__ 构造函数，除了必须传递一个 self 以外，其他两个是自定义的参数
         self.name = name
         self.score = score
 

@@ -12,7 +12,9 @@ def main():
     try:
         bar('0')
     except Exception as e:
-        logging.exception(e)
+        print("---------------")
+        logging.exception(e)  # 这里 显示了错误，但程序并没有终止。
+
 
 main()
 print('END')
