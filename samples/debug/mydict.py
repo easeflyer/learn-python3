@@ -1,6 +1,11 @@
+
+
+
+# Dict 的目的：
+# 通过
 class Dict(dict):
 
-    def __init__(self, **kw):
+    def __init__(self, **kw):       # **kw  任意多个 关键字参数
         super().__init__(**kw)
 
     def __getattr__(self, key):

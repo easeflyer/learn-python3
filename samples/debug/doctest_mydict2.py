@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 
 class Dict(dict):
-    '''
+    ''' 当模块正常导入时，doctest不会被执行。只有在命令行直接运行时，才执行doctest。
+    doctest非常有用，不但可以用来测试，还可以直接作为示例代码。通过某些文档生成工具，就可以自动把包含doctest的注释提取出来。用户看文档的时候，同时也看到了doctest。
     Simple dict but also support access as x.y style.
 
     >>> d1 = Dict()
