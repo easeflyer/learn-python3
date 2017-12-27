@@ -3,11 +3,14 @@
 
 from datetime import datetime
 
-with open('test.txt', 'w') as f:
+
+# 注意默认情况下 encoding 跟着系统走，windows 系统默认采用gbk 编码
+#with open('test.txt', 'w') as f:
+with open('test.txt', 'w', encoding='utf-8') as f:    
     f.write('今天是 ')
     f.write(datetime.now().strftime('%Y-%m-%d'))
 
-with open('test.txt', 'r') as f:
+with open('test.txt', 'r', encoding='utf-8') as f:
     s = f.read()
     print('open for read...')
     print(s)
