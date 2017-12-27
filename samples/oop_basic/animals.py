@@ -39,7 +39,24 @@ d = yazi()
 run_twice(c)
 run_twice(d)
 
+
+# 显示变量的类型用 type
 print(type(d)=='yazi')  # False
 print(type(d)==yazi)    # True
 print(type(c)==Animal)  # False
 print(type(c)==Cat)     # True
+
+print("-"*80)
+# 判断一个变量是否为 某个类型用 isinstance
+
+# print(isinstance(d,'yazi'))  # False
+print(isinstance(d,yazi))    # True
+print(isinstance(c,Animal))  # True
+print(isinstance(c,Cat))     # True
+print(isinstance(d,Animal))  # True
+
+print("Dog or Cat:",isinstance(c,(Dog,Cat)))  # True
+
+print("-"*80)
+
+print("Dog:",dir(Dog))

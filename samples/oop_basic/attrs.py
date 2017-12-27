@@ -23,3 +23,7 @@ print('getattr(obj, \'z\') =',getattr(obj, 'z', 404)) # 获取属性'z'，如果
 f = getattr(obj, 'power') # 获取属性'power'
 print(f)
 print(f())
+
+'''
+setattr 函数对应函数 getatt()，用于设置属性值，该属性必须存在。
+'''
