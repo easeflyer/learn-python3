@@ -5,24 +5,17 @@ import time, threading
 
 # 假定这是你的银行存款:
 balance = 0
-lock = threading.Lock()         # 获得锁对象
-#print(type(lock)) # <class '_thread.lock'>
+
 def change_it(n):
     # 先存后取，结果应该为0:
     global balance
     balance = balance + n
+    #time.sleep(0.00001)
     balance = balance - n
 
 def run_thread(n):
     for i in range(1000000):
-        # 先要获取锁:
-        lock.acquire()          # 获取锁
-        try:
-            # 放心地改吧:
-            change_it(n)
-        finally:
-            # 改完了一定要释放锁: # 释放锁
-            lock.release()
+        change_it(n)
 
 t1 = threading.Thread(target=run_thread, args=(5,))
 t2 = threading.Thread(target=run_thread, args=(8,))
