@@ -60,9 +60,9 @@ print("\n例4","-"*80)
 #例4：
 #说明：yield from iterable本质上等于for item in iterable: yield item的缩写版   
  
-# 这个案例 用 for 循环 迭代了 生成器 f 然后返回 g 自己也是一个生成器
+# 这个案例 用 for 循环 迭代了 生成器 f 然后返回 g; f_wraper1 自己也是一个生成器
 def f_wrapper1(f):
-    for g  in f:
+    for g  in f:    # 注意这里我们传递进来的 f 是fab3(5)
         yield g
 wrap = f_wrapper1(fab3(5))
 for i in wrap:
