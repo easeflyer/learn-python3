@@ -13,10 +13,13 @@ def producer(sequence,output_q):            # 生产者
         output_q.put(item)
 
 if __name__ == '__main__':
+    #q = multiprocessing.JoinableQueue()
     q = multiprocessing.JoinableQueue()
     cons_p = multiprocessing.Process(target=consumer,args=(q,))
-    cons_p.daemon = True
+    cons_p.daemon = True                    # 设置为后台进程，创建者终止，他自动终止
     cons_p.start()
 
     sequence = [1,2,3,4]
     producer(sequence,q)
+
+    q.join()
