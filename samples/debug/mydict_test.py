@@ -27,7 +27,7 @@ class TestDict(unittest.TestCase):              # 编写单元测试 类 代码
 
     def test_keyerror(self):
         d = Dict()
-        with self.assertRaises(KeyError):
+        with self.assertRaises(KeyError):       # with 语句干了设么？
             value = d['empty']                  # d['empty']  访问不存在的key时
 
     def test_attrerror(self):

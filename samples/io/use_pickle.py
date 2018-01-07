@@ -22,16 +22,17 @@ import pickle
 
 d = dict(name='Bob', age=20, score=88)      # 定义一个字典
 data = pickle.dumps(d)                      # 序列化：pickle.dumps()方法把任意对象序列化成一个  bytes
-print(data)
+print("data:",data)                         # data:b'\x80\x03}q\x00(X\x04\x00\x00\x00nameq\x01X\x03\x00\x00\.....
 
 reborn = pickle.loads(data)                 # 反序列化 成对象
-print(reborn['name'])
+print(reborn['name'])                       # Bob
 
 
+# 仍然是 操作上面定义的 d
 with open('./f.txt','wb') as f:
-    pickle.dump(d,f)                        # 序列化：pickle.dumps()方法把任意对象序列化成一个  bytes
+    pickle.dump(d,f)                        # 序列化：pickle.dumps()方法把任意对象序列化成一个  bytes , 然后保存到 file-like  f
 
 with open('./f.txt','rb') as f:
-    reborn1 = pickle.load(f)                 # 反序列化 成对象
+    reborn1 = pickle.load(f)                # 反序列化 成对象
 
 print(reborn1['age'])

@@ -19,7 +19,7 @@ import json
 d = dict(name='Bob', age=20, score=88)
 data = json.dumps(d)                        # json.dumps(d) 对象转换为 json 字符串
 print(type(data))
-print('JSON Data is a str:', data)
+print('JSON Data is a str:', data)          # json 数据就是一个字符串
 reborn = json.loads(data)                   # json.loads(data) 还原为 对象
 print(reborn)
 print("reborn.name:",reborn['name'])
@@ -43,6 +43,7 @@ print("-"*80)
 
 
 class Student(object):
+    sname='Student'
 
     def __init__(self, name, age, score):
         self.name = name
@@ -55,7 +56,8 @@ class Student(object):
 s = Student('Bob', 20, 88)
 print("obj.__dict__:",s.__dict__)           # 通常自定义的对象都有一个 __dict__属性 用来保存 属性列表
 
-std_data = json.dumps(s, default=lambda obj: obj.__dict__)
+std_data = json.dumps(s, default=lambda obj: obj.__dict__)   # 注意这里 default 是一个命名参数
 print('Dump Student:', std_data)
 rebuild = json.loads(std_data, object_hook=lambda d: Student(d['name'], d['age'], d['score']))
+        #  json.loads（）传入函数参数：object_hook=lambda d: Student(d['name'], d['age'], d['score'])  对于json数据d反序列化,然后 利用 Student 重新构造对象。
 print(rebuild)
