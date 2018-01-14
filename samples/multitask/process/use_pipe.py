@@ -19,6 +19,7 @@ def consumer(pipe,id):
     print('Consumer done')
         
 def producer(sequence, input_p):
+    print("CPU：",multiprocessing.cpu_count())    # 工具函数参考：Python参考手册(第4版).pdf 20章
     for item in sequence:
         print('生产：',item)
         input_p.send(item)
