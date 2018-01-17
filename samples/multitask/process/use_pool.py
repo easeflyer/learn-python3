@@ -11,6 +11,7 @@ import time
 
 BUFSIZE=8192
 POOLSIZE=4
+
 def compute_digest(filename):           # compute_digest  计算摘要
     '''
     输入：根据带路径的 文件 filename 
@@ -37,7 +38,7 @@ def compute_digest(filename):           # compute_digest  计算摘要
                                         # hash.hexdigest() 返回字符串
                                         # 类似digest()，但是摘要以2倍长度的字符串对象返回，只包含十六进制数字。这可用于在电子邮件或其它非二进制环境中安全交换数据
 
-def build_digest_map(topdir):
+def build_digest_map(topdir):           # digest  [daɪ'dʒɛst] 摘要
     '''
 
     '''

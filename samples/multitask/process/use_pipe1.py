@@ -6,7 +6,7 @@ import multiprocessing, time
 
 def consumer(pipe,id):
     output_p, input_p = pipe
-    #input_p.close()                     # 关闭管道的输入端，因为消费者 只需要输出端 接收数据
+    input_p.close()                     # 关闭管道的输入端，因为消费者 只需要输出端 接收数据
     while True:
         try:
             item = output_p.recv()      # 接收c.send()方法返回的对象 如果input 端已经关闭，则抛出错误
@@ -14,7 +14,7 @@ def consumer(pipe,id):
             break
         # 处理项目
         print("%s消费：%s" % (id,item))             # 接收到以后消费
-        time.sleep(3)
+        #time.sleep(3)
     # 关闭
     print('Consumer done')
         
@@ -22,7 +22,7 @@ def producer(sequence, input_p):
     for item in sequence:
         print('生产：',item)
         input_p.send(item)              # 发送数据，写入
-        # time.sleep(1) #间隔2秒
+        time.sleep(1) #间隔2秒
 
 if __name__ == '__main__':
     (output_p, input_p) = multiprocessing.Pipe()        # 建立管道，返回两个 connection 对象
