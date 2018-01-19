@@ -37,7 +37,7 @@ if __name__ == '__main__':
 
 
 
-    sequence = [1,2,3,4,5,6,7,8,9,0]                    # 待处理任务列表
+    sequence = [1,2,3,4,5,6,7,8,9,0]         # 待处理任务列表
     producer(sequence,q)
 
     q.join()                                # 等消费者完成之后再退出。

@@ -14,6 +14,7 @@ if __name__ == '__main__':
     m = MyManager()
     m.start()
     # Create a managed object
-    a = m.A(37)                 # 实例化共享对象 A 的实例
+    a = m.A(37)                 # 实例化共享对象 A 的实例 在管理器中注册后，就可以这样使用了。
     #print(a.getX())
     print(a.x)                  # 自定义代理中 设定了 x 属性的装饰器，因此可以直接访问
+    print("m.address:",m.address)

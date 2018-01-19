@@ -27,13 +27,24 @@ q.join                  阻塞当前进程，直到队列所有项目都task_don
 
 '''
 
+class MyCls(object):
+    def __init__(self,name):
+        self.name = name
+        self.v1 = "123"
+        self.v2 = "456"
+        self.v3 = (1,2,3)
+    def test(self):
+        return self.v2
 
 
-def consumer(input_q):                      # 消费者（阻塞的，等待生产）
+
+
+
+def consumer(input_q,n):                      # 消费者（阻塞的，等待生产）
     while True:
         print("cons wait for get....")
         item = input_q.get()                # 挂起等待队列
-        print("消费：",item)                 # 具体如何消费,某些具体操作
+        print(n,"消费：",item.test(),":",item.v1)      # 具体如何消费,某些具体操作
         time.sleep(2)
         input_q.task_done()
 def producer(sequence,output_q):            # 生产者（非阻塞，一直生产）
@@ -45,11 +56,17 @@ def producer(sequence,output_q):            # 生产者（非阻塞，一直生�
 if __name__ == '__main__':
     #q = multiprocessing.Queue()            # 不能用他，不具备 join 功能和 task_done
     q = multiprocessing.JoinableQueue()
-    cons_p = multiprocessing.Process(target=consumer,args=(q,))
+    cons_p = multiprocessing.Process(target=consumer,args=(q,1))
     cons_p.daemon = True                    # 设置为后台进程，创建者终止，他自动终止
     cons_p.start()
 
-    sequence = [1,2,3,4]                    # 待处理任务列表,模拟了一个任务列表。（可理解为“原材料”）
+    cons_p1 = multiprocessing.Process(target=consumer,args=(q,2))
+    cons_p1.daemon = True                    # 设置为后台进程，创建者终止，他自动终止
+    cons_p1.start()
+
+    #sequence = [1,2,3,4]                    # 待处理任务列表,模拟了一个任务列表。（可理解为“原材料”）
+    sequence = [MyCls(i) for i in range(16)] # 这里没有序列化 。
+    sequence[10].v1 = "我被修改了！"           # 经过这里测试，发现数据是共享的。
     producer(sequence,q)                    # “原材料”交给 producter 加工，然后发给消费者
 
     q.join()                                # 等消费者完成之后再退出。如果不用，主进程将提前终止，子进程，也将随之终止。

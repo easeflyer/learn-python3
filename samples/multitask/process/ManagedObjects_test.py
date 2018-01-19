@@ -1,5 +1,17 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
+
+# 本例子是把 Amodule.py 和 ManagedObjects1.py 写到一起 进行测试
+# 参考：http://blog.csdn.net/geekleee/article/details/77838288，https://bugs.python.org/issue25053
+
+
+import multiprocessing
+from multiprocessing.managers import BaseManager
+from Amodule import A,MyManager
+
+
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
 from multiprocessing.managers import SyncManager
 
 '''
@@ -52,4 +64,22 @@ MyManager.register("A", A, proxytype=AProxy)        # 管理器 注册 A 类对�
 '''
 注意：这个部分，必须写到一个模块里，如果写在 __main__ 文件中可能会报错。
 这个问题好像和多核处理器有关，参考：http://blog.csdn.net/geekleee/article/details/77838288
+
 '''
+
+
+'''
+
+Amodule 模块中 自定义了一个类型 A 和 管理器 MyManager
+
+'''
+
+
+#MyManager.register("A", A)
+if __name__ == '__main__':
+    m = MyManager()
+    m.start()
+    # Create a managed object
+    a = m.A(37)                 # 实例化共享对象 A 的实例 在管理器中注册后，就可以这样使用了。
+    #print(a.getX())
+    print(a.x)                  # 自定义代理中 设定了 x 属性的装饰器，因此可以直接访问
